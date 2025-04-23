@@ -23,16 +23,17 @@ export default function SignupPage() {
     const onSignup = async () => {
         try {
             setLoading(true);
+
             const response = await axios.post('/api/users/signup', user);
             
             if (response.data.success === true) {
                 toast.success("User signup successfully");
+                router.push('/login');
             }
             console.log("Signup success: ", response.data);
             
-            router.push('/login');
         } catch (error: any) {
-            toast.error(`Signup failed: ${error.message}`);
+            toast.error(error.response.data.error);
         } finally {
             setLoading(false);
         }
@@ -59,7 +60,7 @@ export default function SignupPage() {
                         </svg>
                     </div>
                     <h1 className="text-3xl font-bold ">Create Account</h1>
-                    <p className="text-gray-500 mt-2">{loading ? "Processing" : "Fill in your details to get started"}</p>
+                    <p className="text-gray-500 mt-2">{loading ? "Processing..." : "Fill in your details to get started"}</p>
                 </div>
     
                 <div className="space-y-5">
