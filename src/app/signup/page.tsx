@@ -28,7 +28,7 @@ export default function SignupPage() {
             
             if (response.data.success === true) {
                 toast.success("User signup successfully");
-                router.push('/login');
+                router.push('/VerifyEmailPage');
             }
             console.log("Signup success: ", response.data);
             

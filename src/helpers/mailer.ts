@@ -39,14 +39,14 @@ export const sendEmail = async (userId: string, username: string, email: string,
         const mailOptions = {
             from: String(process.env.SMTP_SENDER_EMAIL),
             to: email,
-            subject: "Verify Your Email Address",
+            subject: emailType === "VERIFYEMAIL" ? "Verify Your Email Address" : "Reset Your Password",
             html: `
                 <!DOCTYPE html>
                 <html lang="en">
                 <head>
                     <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Verify Your Email Address</title>
+                    <title>${emailType === "VERIFYEMAIL" ? "Verify Your Email Address" : "Reset Your Password"}</title>
                     <style>
                         body {
                             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -123,24 +123,38 @@ export const sendEmail = async (userId: string, username: string, email: string,
                         </div>
                         
                         <div class="content">
-                            <h1>Verify Your Email Address</h1>
+                            <h1>${emailType === "VERIFYEMAIL" ? "Verify Your Email Address" : "Reset Your Password"}</h1>
                             <p>Hello ${username},</p>
-                            <p>Thank you for signing up with us! To complete your registration, please verify your email address by clicking the button below:</p>
+                            <p>
+                                ${emailType === "VERIFYEMAIL" ? 
+                                    "Thank you for signing up with us! To complete your registration, please verify your email address by clicking the button below:" 
+                                    :
+                                    "We received a request to reset your password. If you made this request, please click the button below to set a new password:"}
+                            </p>
                             
                             <div style="text-align: center;">
-                                <a href="${verificationLink}" class="button">Verify Email Address</a>
+                                <a href="${verificationLink}" class="button">
+                                    ${emailType === "VERIFYEMAIL" ? "Verify Email Address" : "Reset Password"}
+                                </a>
                             </div>
                             
                             <p>Or copy and paste this link into your browser:</p>
-                            <p><a href="${verificationLink}">{Verification Link}</a></p>
+                            <p><a href="${verificationLink}">Verification Link</a></p>
                             
-                            <p>If you didn't create an account with us, please ignore this email.</p>
                             
-                            <p>Best regards,<br>The {{gobindaDas}} Team</p>
+                            <p>
+                                ${emailType === "VERIFYEMAIL" ? 
+                                    "If you didn't create an account with us, please ignore this email." 
+                                    : 
+                                    "If you didn’t request a password reset, you can safely ignore this email."
+                                }
+                            </p>
+                            
+                            <p>Best regards,<br>The gobindaDas Team</p>
                         </div>
                         
                         <div class="footer">
-                            <p>&copy; {{2025}} {{gobindaDas}}. All rights reserved.</p>
+                            <p>&copy; 2025 gobindaDas. All rights reserved.</p>
                             <p>
                                 <a href="{{websiteUrl}}">Our Website</a> | 
                                 <a href="{{privacyPolicyUrl}}">Privacy Policy</a> | 
