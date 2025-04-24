@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 
 
-const VerifyEmailPage = () => {
+const Verifyemail = () => {
 
     const [isResent, setIsResent] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -115,4 +115,4 @@ const VerifyEmailPage = () => {
 
 
 
-export default VerifyEmailPage;
+export default Verifyemail;
