@@ -8,14 +8,16 @@ import User from "@/models/userModel";
 connectDB()
 
 
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
     try {
 
         const reqBody = await request.json();
         const { token } = reqBody;
+        console.log(token);
+        
 
 
-        const user = await User.findOne({verifyToken: token}, {verifyTokenExpiry: {$gt: Date.now()}});
+        const user = await User.findOne({verifyToken: token, verifyTokenExpiry: {$gt: Date.now()}});
 
         if (!user) {
             return NextResponse.json({error: "Invalid or expired token"}, {status: 400})

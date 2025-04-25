@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 
 
+
 export default function SignupPage() {
 
     const router = useRouter();
@@ -19,7 +20,6 @@ export default function SignupPage() {
     const [loading, setLoading] = React.useState(false);
 
 
-
     const onSignup = async () => {
         try {
             setLoading(true);
@@ -28,9 +28,9 @@ export default function SignupPage() {
             
             if (response.data.success === true) {
                 toast.success("User signup successfully");
-                router.push('/Verifyemail');
+                router.push('/verifyemail');
             }
-            console.log("Signup success: ", response.data);
+            //console.log("Signup success: ", response.data);
             
         } catch (error: any) {
             toast.error(error.response.data.error);
