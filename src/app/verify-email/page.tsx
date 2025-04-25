@@ -17,7 +17,7 @@ export default function EmailVerificationPage() {
 
     const verifyUserEmail = async () => {
         try {
-            const response = await axios.post(`/api/users/emailverification`, { token });
+            const response = await axios.post("/api/users/verify-email", { token });
 
             if (response.data.success) {
                 setVerificationStatus("verified");
@@ -33,7 +33,7 @@ export default function EmailVerificationPage() {
 
     useEffect(() => {
         const urlToken = window.location.search.split("=")[1];
-        setToken(urlToken.toString() || "");
+        setToken(urlToken || "");
     }, []);
 
 
@@ -95,7 +95,7 @@ export default function EmailVerificationPage() {
                             </p>
                             <div className="flex space-x-4 mt-4">
                                 <button
-                                    onClick={() => window.location.reload()}
+                                    onClick={verifyUserEmail}
                                     className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition duration-200"
                                 >
                                     Try Again
