@@ -13,7 +13,6 @@ export async function POST(request: NextRequest) {
 
         const reqBody = await request.json();
         const { token } = reqBody;
-        console.log(token);
         
 
         const user = await User.findOne({

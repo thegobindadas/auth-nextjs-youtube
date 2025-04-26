@@ -1,8 +1,8 @@
 "use client";
 import React from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import Link from 'next/link';
 import axios from 'axios';
 
 
@@ -21,7 +21,6 @@ export default function LoginPage() {
     const [loading, setLoading] = React.useState(false);
 
 
-
     const validateEmail = (email: string) => {
         if (!email.includes('@')) {
             setErrors({...errors, email: 'Please enter a valid email address'});
@@ -31,7 +30,8 @@ export default function LoginPage() {
         return true;
     };
 
-    const handleEmailChange = (e) => {
+
+    const handleEmailChange = (e: any) => {
         setUser({...user, email: e.target.value});
         // Clear error when user starts typing again
         if (errors.email && e.target.value.includes('@')) {
@@ -117,9 +117,14 @@ export default function LoginPage() {
                     </div>
     
                     <div className="space-y-1">
-                        <label htmlFor="password" className="block text-sm font-medium ">
-                            Password
-                        </label>
+                        <div className="flex justify-between items-center">
+                            <label htmlFor="password" className="block text-sm font-medium ">
+                                Password
+                            </label>
+                            <Link href="/forgot-password" className="text-sm font-medium text-indigo-400 hover:text-indigo-300 transition-colors duration-200">
+                                Forgot password?
+                            </Link>
+                        </div>
                         <div className="relative">
                             <input
                                 id="password"
