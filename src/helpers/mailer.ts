@@ -9,7 +9,9 @@ export const sendEmail = async (userId: string, username: string, email: string,
 
         const verificationToken = await bcrypt.hash(userId, 10);
         
-        const verificationLink = `${process.env.DOMAIN}/verify-email?token=${verificationToken}`;
+        const verificationLink = emailType === "VERIFYEMAIL" ? 
+            `${process.env.DOMAIN}/verify-email?token=${verificationToken}` :
+            `${process.env.DOMAIN}/reset-password?token=${verificationToken}`;
 
 
         if (emailType === "VERIFYEMAIL") {

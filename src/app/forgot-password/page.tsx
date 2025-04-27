@@ -51,7 +51,6 @@ function ForgotPassword() {
             try {
                 // Simulate API call
                 const response = await axios.post('/api/users/forgot-password', { email });
-                console.log("send password reset link: ", response.data);
                 
                 
                 if (response.data.success === true) {

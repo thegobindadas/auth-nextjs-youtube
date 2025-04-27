@@ -8,7 +8,7 @@ export function middleware(request: NextRequest) {
     const path = request.nextUrl.pathname;
  
     const isPublicPath = path === '/login' || path === '/signup' || path === '/resend-verification' || 
-                         path === '/verify-email' || path === '/forgot-password' || path === '/forgot-password-success'
+                         path === '/verify-email' || path === '/forgot-password' || path === '/forgot-password-success' ||
                          path === '/reset-password';
  
 
@@ -36,6 +36,6 @@ export const config = {
     '/verify-email',
     '/forgot-password',
     '/forgot-password-success',
-    '/reset-password',
+    '/reset-password'
   ]
 }
